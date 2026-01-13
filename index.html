@@ -1,3 +1,116 @@
+<!-- TOP NAV (matches your screenshot style) -->
+<nav class="blm-topnav">
+  <div class="blm-topnav__inner">
+
+    <!-- Left Links -->
+    <div class="blm-topnav__left">
+      <a href="#" class="blm-navlink active">Dashboard</a>
+      <a href="#" class="blm-navlink">Legal Activity</a>
+      <a href="#" class="blm-navlink">Matters</a>
+      <a href="#" class="blm-navlink">Document Library</a>
+      <a href="#" class="blm-navlink">Take Survey</a>
+    </div>
+
+    <!-- Right User/Entity -->
+    <div class="blm-topnav__right">
+      <div class="blm-userline">Welcome Donna</div>
+      <div class="blm-entityline">Entity: Paul Mitchell Rexburg</div>
+      <div class="blm-avatar">DW</div>
+    </div>
+
+  </div>
+</nav>
+
+<style>
+  :root{
+    --navy:#0F2D56;
+    --muted:#6B7280;
+    --border:#E5E7EB;
+    --hoverBg:#EDF2FA;
+  }
+
+  .blm-topnav{
+    width:100%;
+    background:#fff;
+    border-bottom:1px solid var(--border);
+  }
+
+  .blm-topnav__inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding: 14px 18px;
+    gap: 18px;
+  }
+
+  .blm-topnav__left{
+    display:flex;
+    align-items:center;
+    gap: 34px;  /* matches screenshot spacing */
+    flex-wrap:wrap;
+  }
+
+  .blm-navlink{
+    color: var(--navy);
+    text-decoration:none;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 0;
+    transition: all .15s ease;
+    white-space: nowrap;
+  }
+
+  .blm-navlink:hover{
+    color:#0c2343;
+    border-bottom-color: rgba(15,45,86,0.18);
+  }
+
+  .blm-navlink.active{
+    border-bottom-color: var(--navy);
+  }
+
+  .blm-topnav__right{
+    display:flex;
+    align-items:center;
+    gap: 20px;
+    white-space: nowrap;
+  }
+
+  .blm-userline,
+  .blm-entityline{
+    font-size: 13px;
+    color:#111827;
+  }
+
+  .blm-avatar{
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--navy);
+    background: var(--hoverBg);
+    border:1px solid rgba(15,45,86,0.15);
+  }
+
+  @media (max-width: 860px){
+    .blm-topnav__inner{
+      flex-direction:column;
+      align-items:flex-start;
+    }
+    .blm-topnav__right{
+      width:100%;
+      justify-content:flex-start;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+    .blm-topnav__left{ gap: 18px; }
+  }
+</style>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
