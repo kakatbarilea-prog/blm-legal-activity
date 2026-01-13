@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BLM Portal — Legal Activity</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<style>
+  :root{
+    --navy:#0F2D56;
+    --navyHover:#0c2343;
+    --gold:#B98000;
+    --muted:#6B7280;
+    --border:#E5E7EB;
+    --soft:#F5F7FB;
+    --cardShadow: 0 6px 22px rgba(0,0,0,0.08);
+    --hoverBg:#EDF2FA;
+    --theadGray:#F1F1F1;
+  }
+
+  body{
+    margin:0;
+    background:#f5f6f8;
+    font-family: Calibri, Arial, sans-serif;
+    color: var(--navy);
+  }
+
+  .page-wrap{
+    width: 100%;
+    margin: 0;
+    padding: 26px 26px 60px;
+    box-sizing: border-box;
+  }
+
+  .outer-shell{
+    width:100%;
+    background:#fff;
+    border-radius: 16px;
+    box-shadow: var(--cardShadow);
+    border: 1px solid #eef0f5;
+    overflow:hidden;
+  }
+
+  .inner-header{
+    background: var(--navy);
+    color:#fff;
+    padding: 22px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+  }
+
+  .inner-header h1{
+    margin:0;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing:.2px;
+  }
+
+  .top-controls{
+    display:flex;
+    justify-content:flex-start;
+    align-items:flex-start;
+    gap: 14px;
+    padding: 18px 18px 14px;
+    background:#fff;
+    flex-wrap:wrap;
+  }
+
+  .search{
+    position:relative;
+    width: 360px;
+    max-width: 100%;
+  }
+
+  .search input{
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 2px;
+    border: 1px solid #d5d7dc;
+    font-size: 14px;
+    outline:none;
+    box-sizing: border-box;
+  }
+
+  .search input:focus{
+    border-color: rgba(15,45,86,0.55);
+    box-shadow: 0 0 0 3px rgba(15,45,86,0.08);
+  }
+
+  .filter-group{
+    position:relative;
+    width: 320px;
+    max-width: 100%;
+  }
+
+  .category-dropdown{
+    position:relative;
+    border:1px solid #D1D5DB;
+    border-radius:6px;
+    padding:8px 10px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    cursor:pointer;
+    background:#fff;
+    min-height: 42px;
+    box-sizing:border-box;
+    user-select:none;
+  }
+
+  .category-selected{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    font-size:13px;
+    max-width: calc(100% - 20px);
+  }
+
+  .category-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:4px 8px;
+    background:#EDF2FA;
+    border:1px solid var(--navy);
+    border-radius:999px;
+    font-weight:600;
+    color: var(--navy);
+  }
+
+  .category-pill i{
+    font-size:11px;
+    cursor:pointer;
+  }
+
+  .category-options{
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+    background:#fff;
+    border:1px solid #D1D5DB;
+    border-radius:6px;
+    margin-top:6px;
+    max-height:220px;
+    overflow-y:auto;
+    display:none;
+    z-index:50;
+  }
+
+  .category-option{
+    padding:8px 10px;
+    font-size:13px;
+    cursor:pointer;
+    color:#111827;
+  }
+
+  .category-option:hover{
+    background:#F0F4FF;
+  }
+
+  .table-wrap{
+    background:#fff;
+    padding: 0 18px 18px;
+  }
+
+  table{
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+  }
+
+  thead th{
+    text-align:left;
+    padding: 13px 14px;
+    font-size: 13px;
+    color: #111827;
+    border-bottom: 1px solid #d9d9d9;
+    background: var(--theadGray);
+    white-space: nowrap;
+    font-weight: 600;
+  }
+
+  tbody td{
+    padding: 14px 14px;
+    border-bottom: 1px solid #eef0f5;
+    font-size: 14px;
+    vertical-align: middle;
+  }
+
+  tbody tr:hover{
+    background: var(--hoverBg);
+  }
+
+  .icon{
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid rgba(15,45,86,0.15);
+    background:#fff;
+  }
+
+  .who{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    min-width: 220px; /* tightened */
+  }
+
+  .who .name{
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 14px;
+    line-height: 1.1;
+  }
+
+  .comment{
+    color:#111827;
+    line-height: 1.45;
+  }
+
+  /* ✅ See More button per time log (Action column) */
+  .btn-see-more{
+    background:#fff;
+    border:0px 
+    color: var(--navy);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor:pointer;
+    display:inline-flex;
+    gap:8px;
+    align-items:center;
+    white-space: nowrap;
+  }
+  .btn-see-more:hover{
+    background:#F3F6FB;
+    border-color:#c7cdd8;
+  }
+
+  .empty{
+    padding: 42px 22px;
+    text-align:center;
+    color: var(--muted);
+    font-size: 14px;
+    display:none;
+  }
+
+  @media (max-width: 760px){
+    .page-wrap{ padding: 18px 14px 60px; }
+    .search{ width:100%; }
+    .filter-group{ width:100%; }
+    thead{ display:none; }
+    table, tbody, tr, td{ display:block; width:100%; }
+    tbody tr{ padding: 10px 0; }
+    tbody td{ border:none; padding: 10px 14px; }
+    tbody td[data-label]::before{
+      content: attr(data-label);
+      display:block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+    .table-wrap{ padding: 0 12px 18px; }
+  }
+</style>
+</head>
+
+<body>
+  <div class="page-wrap">
+    <div class="outer-shell">
+
+      <div class="inner-header">
+        <h1>Legal Activity</h1>
+      </div>
+
+      <div class="top-controls">
+        <div class="search">
+          <!-- ✅ Updated placeholder only -->
+          <input id="searchInput" type="text" placeholder="Search legal activity..." />
+        </div>
+
+        <div class="filter-group">
+          <div class="category-dropdown" onclick="toggleDropdown(event,'matter')">
+            <div class="category-selected" id="matterSelected">
+              <span style="color:#6B7280;">Filter by matter</span>
+            </div>
+            <i class="fa-solid fa-chevron-down" style="font-size:12px;color:#6B7280;"></i>
+            <div class="category-options" id="matterOptions"></div>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="category-dropdown" onclick="toggleDropdown(event,'attorney')">
+            <div class="category-selected" id="attorneySelected">
+              <span style="color:#6B7280;">Filter by attorney</span>
+            </div>
+            <i class="fa-solid fa-chevron-down" style="font-size:12px;color:#6B7280;"></i>
+            <div class="category-options" id="attorneyOptions"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <!-- ✅ Tightened widths -->
+              <th style="width:240px;">Logged By</th>
+              <th style="width:240px;">Matter</th>
+              <th style="width:140px;">Date</th>
+              <th style="width:190px;">Time Logged</th>
+              <th>Comment</th>
+              <th style="width:140px;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+
+        <div class="empty" id="emptyState">No activity to show right now.</div>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+const ICON_PLACEHOLDER = "https://d34hmiuaex7c0.cloudfront.net/5626/uploads/page_featured_img_1740731397866.jpg";
+
+const activity = [
+  {
+    attorney: "Jessica Cahoon",
+    date: "01/13/2026",
+    totalTime: "0 Hours, 42 Minutes",
+    matterName: "Miscellaneous Legal Work",
+    comment: "Review email, lease and draft lease amendment for review."
+  },
+  {
+    attorney: "Jessica Cahoon",
+    date: "01/13/2026",
+    totalTime: "0 Hours, 12 Minutes",
+    matterName: "Miscellaneous Legal Work",
+    comment: "Email with Stephanie re final changes to longevity bonus for employee handbook"
+  },
+  {
+    attorney: "Jessica Cahoon",
+    date: "01/13/2026",
+    totalTime: "0 Hours, 6 Minutes",
+    matterName: "Miscellaneous Legal Work",
+    comment: "Email with Stephanie re longevity bonus and language I would add."
+  },
+  {
+    attorney: "George Brunt",
+    date: "01/13/2026",
+    totalTime: "0 Hours, 30 Minutes",
+    matterName: "Principal Consulting",
+    comment: "Email to Brian re Building Purchase"
+  }
+];
+
+let filterState = { matters: [], attorneys: [] };
+
+function unique(arr){ return Array.from(new Set(arr)); }
+const ALL_MATTERS = unique(activity.map(a => a.matterName)).sort();
+const ALL_ATTORNEYS = unique(activity.map(a => a.attorney)).sort();
+
+function renderDropdown(kind){
+  const selectedEl = document.getElementById(kind + "Selected");
+  const optionsEl  = document.getElementById(kind + "Options");
+
+  const stateKey = (kind === "matter") ? "matters" : "attorneys";
+  const source   = (kind === "matter") ? ALL_MATTERS : ALL_ATTORNEYS;
+
+  selectedEl.innerHTML = filterState[stateKey].length
+    ? filterState[stateKey].map(val => `
+        <span class="category-pill">
+          ${escapeHtml(val)}
+          <i class="fa-solid fa-xmark"
+             onclick="removeFilter('${kind}','${val.replace(/'/g,"\\'")}'); event.stopPropagation();">
+          </i>
+        </span>
+      `).join("")
+    : `<span style="color:#6B7280;">Filter by ${kind}</span>`;
+
+  optionsEl.innerHTML = source
+    .filter(val => !filterState[stateKey].includes(val))
+    .map(val => `
+      <div class="category-option" onclick="addFilter('${kind}','${val.replace(/'/g,"\\'")}')">
+        ${escapeHtml(val)}
+      </div>
+    `).join("");
+
+  if(!optionsEl.innerHTML.trim()){
+    optionsEl.innerHTML = `<div class="category-option" style="cursor:default;color:#6B7280;">No more options</div>`;
+  }
+}
+
+function toggleDropdown(e, kind){
+  e.stopPropagation();
+  const menu = document.getElementById(kind + "Options");
+  const isOpen = menu.style.display === "block";
+
+  document.getElementById("matterOptions").style.display = "none";
+  document.getElementById("attorneyOptions").style.display = "none";
+
+  menu.style.display = isOpen ? "none" : "block";
+}
+
+function addFilter(kind, val){
+  const stateKey = (kind === "matter") ? "matters" : "attorneys";
+  if(!filterState[stateKey].includes(val)) filterState[stateKey].push(val);
+  renderDropdown(kind);
+  render();
+}
+
+function removeFilter(kind, val){
+  const stateKey = (kind === "matter") ? "matters" : "attorneys";
+  filterState[stateKey] = filterState[stateKey].filter(v => v !== val);
+  renderDropdown(kind);
+  render();
+}
+
+document.addEventListener("click", () => {
+  document.getElementById("matterOptions").style.display = "none";
+  document.getElementById("attorneyOptions").style.display = "none";
+});
+
+function rowHTML(item, idx){
+  return `
+    <tr>
+      <td data-label="Logged By">
+        <div class="who">
+          <img class="icon" src="${ICON_PLACEHOLDER}" alt="icon" />
+          <div>
+            <!-- ✅ Removed "Logged By" subtext -->
+            <div class="name">${escapeHtml(item.attorney)}</div>
+          </div>
+        </div>
+      </td>
+
+      <td data-label="Matter">${escapeHtml(item.matterName)}</td>
+      <td data-label="Date">${escapeHtml(item.date)}</td>
+      <td data-label="Total Time Logged">${escapeHtml(item.totalTime)}</td>
+      <td data-label="Comment">
+        <div class="comment">${escapeHtml(item.comment)}</div>
+      </td>
+
+      <!-- ✅ See More per time log -->
+      <td data-label="Action">
+        <button class="btn-see-more" type="button" onclick="seeMore(${idx})">
+          See More <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </button>
+      </td>
+    </tr>
+  `;
+}
+
+function render(){
+  const tbody = document.getElementById("tbody");
+  const empty = document.getElementById("emptyState");
+  const q = (document.getElementById("searchInput").value || "").trim().toLowerCase();
+
+  let filtered = activity.slice();
+
+  if(filterState.matters.length){
+    filtered = filtered.filter(a => filterState.matters.includes(a.matterName));
+  }
+  if(filterState.attorneys.length){
+    filtered = filtered.filter(a => filterState.attorneys.includes(a.attorney));
+  }
+
+  if(q){
+    filtered = filtered.filter(a => {
+      const hay = [a.attorney,a.totalTime,a.matterName,a.comment,a.date].join(" ").toLowerCase();
+      return hay.includes(q);
+    });
+  }
+
+  tbody.innerHTML = filtered.map((a,i)=>rowHTML(a,i)).join("");
+  empty.style.display = (filtered.length === 0) ? "block" : "none";
+}
+
+/* ✅ Per-log action */
+function seeMore(idx){
+  const item = activity[idx];
+  alert(
+    "Legal Activity Details:\n\n" +
+    "Logged By: " + item.attorney + "\n" +
+    "Matter: " + item.matterName + "\n" +
+    "Date: " + item.date + "\n" +
+    "Total Time Logged: " + item.totalTime + "\n\n" +
+    "Comment:\n" + item.comment
+  );
+}
+
+function escapeHtml(str){
+  return String(str)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+document.getElementById("searchInput").addEventListener("input", render);
+
+renderDropdown("matter");
+renderDropdown("attorney");
+render();
+</script>
+
+</body>
+</html>
