@@ -312,11 +312,12 @@
   .icon{
     width: 34px;
     height: 34px;
-    border-radius: 8px;
+    border-radius: 50%;
     object-fit: cover;
     border: 1px solid rgba(15,45,86,0.15);
     background:#fff;
   }
+
 
   .who{
     display:flex;
@@ -444,11 +445,12 @@
   </div>
 
 <script>
-const ICON_PLACEHOLDER = "https://d34hmiuaex7c0.cloudfront.net/5626/uploads/page_featured_img_1740731397866.jpg";
+
 
 const activity = [
   {
     attorney: "Jessica Cahoon",
+    headshot: "https://d34hmiuaex7c0.cloudfront.net/5052/uploads/profile/staffuser/5060/1666032537644.jpg",
     date: "01/13/2026",
     totalTime: "0 Hours, 42 Minutes",
     matterName: "Miscellaneous Legal Work",
@@ -456,6 +458,7 @@ const activity = [
   },
   {
     attorney: "Jessica Cahoon",
+    headshot: "https://d34hmiuaex7c0.cloudfront.net/5052/uploads/profile/staffuser/5060/1666032537644.jpg",
     date: "01/13/2026",
     totalTime: "0 Hours, 12 Minutes",
     matterName: "Miscellaneous Legal Work",
@@ -463,6 +466,7 @@ const activity = [
   },
   {
     attorney: "Jessica Cahoon",
+    headshot: "https://d34hmiuaex7c0.cloudfront.net/5052/uploads/profile/staffuser/5060/1666032537644.jpg",
     date: "01/13/2026",
     totalTime: "0 Hours, 6 Minutes",
     matterName: "Miscellaneous Legal Work",
@@ -470,12 +474,14 @@ const activity = [
   },
   {
     attorney: "George Brunt",
+    headshot: "https://d34hmiuaex7c0.cloudfront.net/5052/uploads/profile/staffuser/5054/1665766283321.jpeg",
     date: "01/13/2026",
     totalTime: "0 Hours, 30 Minutes",
     matterName: "Principal Consulting",
     comment: "Email to Brian re Building Purchase"
   }
 ];
+
 
 let filterState = { matters: [], attorneys: [] };
 
@@ -549,7 +555,8 @@ function rowHTML(item, idx){
     <tr>
       <td data-label="Logged By">
         <div class="who">
-          <img class="icon" src="${ICON_PLACEHOLDER}" alt="icon" />
+          <img class="icon" src="${item.headshot}" alt="${escapeHtml(item.attorney)}" />
+
           <div>
             <!-- ✅ Removed "Logged By" subtext -->
             <div class="name">${escapeHtml(item.attorney)}</div>
